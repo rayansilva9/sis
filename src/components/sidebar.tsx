@@ -4,31 +4,65 @@ import { FiSettings } from 'react-icons/fi'
 import { FiArchive } from 'react-icons/fi'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import { useEffect, useRef, useState } from 'react'
 
 const Sidebar: React.FC = () => {
   const pathname = useRouter().pathname
 
+  const dashboardRef = useRef<HTMLLIElement>(null)
+  const productRef = useRef<HTMLLIElement>(null)
+  const salesRef = useRef<HTMLLIElement>(null)
+  const settingsRef = useRef<HTMLLIElement>(null)
+
+  const [positionBar, setPositionBar] = useState(0)
+
+  function updateBar() {
+    if (pathname == '/') {
+      setPositionBar(dashboardRef.current!.getBoundingClientRect().top)
+    }
+    if (pathname == '/produtos') {
+      setPositionBar(productRef.current!.getBoundingClientRect().top)
+    }
+    if (pathname == '/vendas') {
+      setPositionBar(salesRef.current!.getBoundingClientRect().top)
+    }
+    if (pathname == '/configurar') {
+      setPositionBar(settingsRef.current!.getBoundingClientRect().top)
+    }
+  }
+
+  useEffect(() => {
+    updateBar()
+  }, [pathname])
+
   return (
     <>
-      <div className="fixed left-0 h-screen w-[250px] flex flex-col items-center py-12 bg-white">
+      <div className="fixed left-0 top-0 h-screen w-[250px] flex flex-col items-center pb-12 pt-[120px] bg-white">
+        <div
+          style={{
+            width: '5px',
+            height: '40px',
+            background: 'blue',
+            position: 'absolute',
+            left: '0',
+            top: positionBar - 5,
+            borderRadius: '50px',
+            transition: 'top .2s linear'
+          }}
+        ></div>
         <div className="relative w-full">
           <ul className="w-full  flex flex-col gap-6">
             <Link href="/">
-              <li className="relative w-full pl-12 flex items-center gap-4 ">
-                <div
+              <li
+                ref={dashboardRef}
+                className="relative w-full pl-12 flex items-center gap-4 "
+              >
+                <FiGrid
                   style={{
-                    display: pathname == '/' ? 'inline' : 'none',
-                    width: '5px',
-                    height: '40px',
-                    background: 'blue',
-                    position: 'absolute',
-                    left: '0',
-                    top: '-5px',
-                    borderRadius: '50px'
+                    fontSize: '22px',
+                    color: pathname == '/' ? 'blue' : '#808080'
                   }}
-                ></div>
-
-                <FiGrid style={{ fontSize: '22px', color: pathname == '/' ? 'blue' : '#808080' }} />
+                />
                 <p
                   style={{ color: pathname == '/' ? 'blue' : '#808080' }}
                   className="font-normal text-lg"
@@ -38,20 +72,16 @@ const Sidebar: React.FC = () => {
               </li>
             </Link>
             <Link href="/produtos">
-              <li className="relative w-full pl-12 flex items-center gap-4 ">
-                <div
+              <li
+                ref={productRef}
+                className="relative w-full pl-12 flex items-center gap-4 "
+              >
+                <FiArchive
                   style={{
-                    display: pathname == '/produtos' ? 'inline' : 'none',
-                    width: '5px',
-                    height: '40px',
-                    background: 'blue',
-                    position: 'absolute',
-                    left: '0',
-                    top: '-5px',
-                    borderRadius: '20px'
+                    fontSize: '21px',
+                    color: pathname == '/produtos' ? 'blue' : '#808080'
                   }}
-                ></div>
-                <FiArchive style={{ fontSize: '21px', color: pathname == '/produtos' ? 'blue' : '#808080' }} />
+                />
                 <p
                   style={{ color: pathname == '/produtos' ? 'blue' : '#808080' }}
                   className="text-lg"
@@ -61,20 +91,16 @@ const Sidebar: React.FC = () => {
               </li>
             </Link>
             <Link href="/vendas">
-              <li className="relative w-full pl-12 flex items-center gap-4 ">
-                <div
+              <li
+                ref={salesRef}
+                className="relative w-full pl-12 flex items-center gap-4 "
+              >
+                <FiDollarSign
                   style={{
-                    display: pathname == '/vendas' ? 'inline' : 'none',
-                    width: '5px',
-                    height: '40px',
-                    background: 'blue',
-                    position: 'absolute',
-                    left: '0',
-                    top: '-5px',
-                    borderRadius: '20px'
+                    fontSize: '22px',
+                    color: pathname == '/vendas' ? 'blue' : '#808080'
                   }}
-                ></div>
-                <FiDollarSign style={{ fontSize: '22px', color: pathname == '/vendas' ? 'blue' : '#808080' }} />
+                />
                 <p
                   style={{ color: pathname == '/vendas' ? 'blue' : '#808080' }}
                   className="text-lg"
@@ -84,20 +110,16 @@ const Sidebar: React.FC = () => {
               </li>
             </Link>
             <Link href="/configurar">
-              <li className="relative w-full pl-12 flex items-center gap-4 ">
-                <div
+              <li
+                ref={settingsRef}
+                className="relative w-full pl-12 flex items-center gap-4 "
+              >
+                <FiSettings
                   style={{
-                    display: pathname == '/configurar' ? 'inline' : 'none',
-                    width: '5px',
-                    height: '40px',
-                    background: 'blue',
-                    position: 'absolute',
-                    left: '0',
-                    top: '-5px',
-                    borderRadius: '20px'
+                    fontSize: '22px',
+                    color: pathname == '/configurar' ? 'blue' : '#808080'
                   }}
-                ></div>
-                <FiSettings style={{ fontSize: '22px', color: pathname == '/configurar' ? 'blue' : '#808080' }} />
+                />
                 <p
                   style={{ color: pathname == '/configurar' ? 'blue' : '#808080' }}
                   className="text-lg"
