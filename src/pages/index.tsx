@@ -10,10 +10,10 @@ export default function Home() {
         style={{ width: 'calc(100vw - 250px) ', height: '100vh', marginLeft: '250px' }}
       >
         <div className="w-full flex gap-5">
-          <CardDashboardSmall />
-          <CardDashboardSmall />
-          <CardDashboardSmall />
-          <CardDashboardSmall />
+          <CardDashboardSmall product='XXXXX' percent={0.4} label='Mais Vendidos' />
+          <CardDashboardSmall product='XXXXX' percent={3.1} label='' />
+          <CardDashboardSmall product='XXXXX' percent={1.4} label='' />
+          <CardDashboardSmall product='XXXXX' percent={6.5} label='' />
         </div>
         <div className="w-full mt-5 flex gap-5">
           <div className="flex flex-col gap-5">
