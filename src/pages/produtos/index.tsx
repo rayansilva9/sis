@@ -1,56 +1,63 @@
-import React, { useState } from 'react'
+import React, { useMemo, useState, useCallback } from 'react'
 import { CiSearch } from 'react-icons/ci'
+import { db } from '@/database/firebase'
 
-import { DataGrid, GridColDef, GridRowId, GridValueGetterParams } from '@mui/x-data-grid'
+import { DataGrid, GridColDef, GridRowId, } from '@mui/x-data-grid'
+import { Button } from '@mui/material'
+import ModalAdditem from '@/components/ModalAddItem'
+
+type product = {
+  nome: string,
+  price: number,
+  data: string,
+  id: string
+}
 
 const Produtos = () => {
   const [select, setSelect] = useState<number | string>(0)
+  const [products, setProducts] = useState<product[]>([])
 
   const columns: GridColDef[] = [
-    { field: 'id', headerName: 'ID', width: 70 },
-    { field: 'firstName', headerName: 'First name', width: 130 },
-    { field: 'lastName', headerName: 'Last name', width: 130 },
+    { field: 'id', type: 'number', headerName: 'ID', width: 70 },
+    { field: 'nome', headerName: 'Nome', width: 130 },
+    { field: 'price', type: 'number', headerName: 'Preço', width: 130 },
     {
-      field: 'age',
-      headerName: 'Age',
-      type: 'number',
-      width: 90
+      field: 'data',
+      headerName: 'Data',
+      type: 'string',
+      width: 210
     },
-    {
-      field: 'fullName',
-      headerName: 'Full name',
-      description: 'This column has a value getter and is not sortable.',
-      sortable: false,
-      width: 160,
-      valueGetter: (params: GridValueGetterParams) =>
-        `${params.row.firstName || ''} ${params.row.lastName || ''}`
-    }
   ]
 
-  const rows = [
-    { id: 1, lastName: 'Snow', firstName: 'Jon', age: 35 },
-    { id: 2, lastName: 'Lannister', firstName: 'Cersei', age: 42 },
-    { id: 3, lastName: 'Lannister', firstName: 'Jaime', age: 45 },
-    { id: 4, lastName: 'Stark', firstName: 'Arya', age: 16 },
-    { id: 5, lastName: 'Targaryen', firstName: 'Daenerys', age: null },
-    { id: 6, lastName: 'Melisandre', firstName: 'Raian', age: 150 },
-    { id: 7, lastName: 'Clifford', firstName: 'Ferrara', age: 44 },
-    { id: 8, lastName: 'Frances', firstName: 'Rossini', age: 36 },
-    { id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
-    { id: 10, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
-    { id: 11, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
-    { id: 12, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
-    { id: 13, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
-    { id: 14, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
-    { id: 15, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
-    { id: 16, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
-    { id: 17, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
-    { id: 18, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
-    { id: 19, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
-    { id: 20, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
-    { id: 21, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
-    { id: 22, lastName: 'Roxie', firstName: 'Harvey', age: 65 }
-  ]
+  const getInevntary = async () => {
+    await db
+      .collection('inventary')
+      .get()
+      .then(q => {
+        setProducts([])
+        q.forEach(doc => {
+          setProducts(prev => [
+            ...prev,
+            {
+              id: doc.data().id,
+              nome: doc.data().nome,
+              price: doc.data().price,
+              data: doc.data().data,
+            }
+          ])
+        })
+      })
+  }
+
+  const i = useCallback(() => {
+    getInevntary()
+  }, [])
+
+  useMemo(() => {
+    i()
+  }, [])
+
+  const [isAddItem, setIsAddItem] = useState(false)
 
   const [find, setFind] = useState<string>('')
   const [alternate, setAlternate] = useState<object[]>([])
@@ -61,21 +68,21 @@ const Produtos = () => {
     if (find == '') {
       setAlternate([])
     }
-    const result = rows.filter(
+    const result = products.filter(
       w =>
-        w.firstName.toLowerCase().includes(find.toLowerCase()) ||
-        w.lastName.toLowerCase().includes(find.toLowerCase())
+        w.nome.toLowerCase().includes(find.toLowerCase())
     )
     setAlternate(result)
   }
 
   return (
     <>
+      <ModalAdditem fetchData={i} FuncIsOpen={setIsAddItem} isOpen={isAddItem} />
       <div
         className="py-2 px-4"
-        style={{ width: 'calc(100vw - 250px) ', height: '100vh', marginLeft: '250px' }}
+        style={{ width: 'calc(100vw - 200px) ', height: '100vh', marginLeft: '250px' }}
       >
-        <div className="w-full flex">
+        <div style={{ width: 'calc(100% - 250px)' }} className="flex my-2">
           <div className="w-[100px]">
             <select
               style={{ height: '100%', border: '1px solid #ccccccb1' }}
@@ -103,10 +110,21 @@ const Produtos = () => {
               placeholder="Procurar produto..."
             />
           </div>
+          <div>
+            <Button
+              onClick={() => setIsAddItem(true)}
+              sx={{
+                marginLeft: '10px'
+              }}
+              variant="outlined"
+            >
+              Add
+            </Button>
+          </div>
         </div>
         <div style={{ flex: 1, width: '100%' }}>
           <DataGrid
-            rows={find != '' ? alternate : rows}
+            rows={find != '' ? alternate : products}
             onRowSelectionModelChange={rowSelectionModel => {
               setRowSelect(rowSelectionModel)
             }}

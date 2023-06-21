@@ -4,7 +4,7 @@ import { FiSettings } from 'react-icons/fi'
 import { FiArchive } from 'react-icons/fi'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, memo } from 'react'
 
 const Sidebar: React.FC = () => {
   const pathname = useRouter().pathname
@@ -135,4 +135,4 @@ const Sidebar: React.FC = () => {
   )
 }
 
-export default Sidebar
+export default memo(Sidebar)

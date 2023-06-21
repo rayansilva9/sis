@@ -1,4 +1,5 @@
 import { useRouter } from 'next/router'
+import { memo } from 'react';
 
 const Header = () => {
   const pathname = useRouter().pathname
@@ -13,10 +14,10 @@ const Header = () => {
           {pathname == '/'
             ? 'Dashboard'
             : pathname == '/produtos'
-            ? 'Produtos'
-            : pathname == '/vendas'
-            ? 'Vendas'
-            : ''}
+              ? 'Produtos'
+              : pathname == '/vendas'
+                ? 'Vendas'
+                : ''}
         </p>
         <div className="">
           <form>
@@ -44,4 +45,4 @@ const Header = () => {
   )
 }
 
-export default Header
+export default memo(Header)
