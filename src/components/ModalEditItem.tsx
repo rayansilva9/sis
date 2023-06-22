@@ -5,10 +5,14 @@ import { Dispatch, SetStateAction, memo, useRef, useState } from 'react'
 type props = {
   isOpen: boolean
   FuncIsOpen: Dispatch<SetStateAction<boolean>>
+  ItemName: string
+  ItemPrice: number
+  ItemQuantity: number
+  ItemId: string | number
   fetchData: () => void
 }
 
-const ModalAdditem = ({ isOpen, FuncIsOpen, fetchData }: props) => {
+const ModalEditItem = ({ isOpen, FuncIsOpen, ItemName, ItemPrice, ItemQuantity, ItemId, fetchData }: props) => {
 
   const NomeInpRef = useRef<TextFieldProps | null>(null)
   const QuantityInpRef = useRef<TextFieldProps | null>(null)
@@ -28,21 +32,25 @@ const ModalAdditem = ({ isOpen, FuncIsOpen, fetchData }: props) => {
     try {
       await db
         .collection('inventary')
-        .get()
-        .then(querySnapshot => {
-          const size = querySnapshot.size;
-          db
-            .collection('inventary')
-            .add({
+        .where('id', '==', ItemId).get()
+        .then((querySnapshot) => {
+          querySnapshot.forEach((doc) => {
+            doc.ref.update({
               nome,
               price,
               data: new Date(date).toISOString(),
-              id: size + 1,
-              quantity: quantity,
+              quantity,
             })
-            .then(() => {
-              alert('Adicionado com sucesso')
-            })
+              .then(() => {
+                console.log('Documento editado com sucesso!');
+              })
+              .catch((error) => {
+                console.error('Erro ao editar documento:', error);
+              });
+          });
+        }).then(() => {
+          FuncIsOpen(false)
+          fetchData()
         })
     } catch (error) {
       alert(error)
@@ -67,10 +75,11 @@ const ModalAdditem = ({ isOpen, FuncIsOpen, fetchData }: props) => {
             <div className="w-[600px] h-[400px] relative z-[100] bg-zinc-100 flex flex-col justify-between px-5 py-24 rounded-lg">
               <form onSubmit={addNewProduct}>
                 <p className="top-[-40px] left-[150px] relative text-2xl">
-                  Adicionar novo produto
+                  Editar produto
                 </p>
                 <div className="flex flex-col gap-4">
                   <TextField
+                    defaultValue={ItemName}
                     ref={NomeInpRef as unknown as any}
                     onChange={({ target }) => setNome(target.value)}
                     id="outlined-basic"
@@ -79,6 +88,8 @@ const ModalAdditem = ({ isOpen, FuncIsOpen, fetchData }: props) => {
                     variant="outlined"
                   />
                   <TextField
+                    defaultValue={ItemQuantity}
+
                     ref={QuantityInpRef as unknown as any}
                     onChange={({ target }) => setQuantity(parseFloat(target.value))}
                     type="text"
@@ -88,6 +99,8 @@ const ModalAdditem = ({ isOpen, FuncIsOpen, fetchData }: props) => {
                     variant="outlined"
                   />
                   <TextField
+                    defaultValue={ItemPrice}
+
                     ref={PriceInpRef as unknown as any}
                     onChange={({ target }) => setPrice(parseFloat(target.value))}
                     type="text"
@@ -101,15 +114,14 @@ const ModalAdditem = ({ isOpen, FuncIsOpen, fetchData }: props) => {
                   <Button
                     disabled={loading ? true : false}
                     onClick={() => {
-                      fetchData(),
-                        FuncIsOpen(false)
+                      FuncIsOpen(false)
                     }}
                     color="error"
                   >
                     Cancelar
                   </Button>
                   <Button color="success" type="submit">
-                    Adicionar
+                    Confirmar
                   </Button>
                 </div>
               </form>
@@ -121,4 +133,4 @@ const ModalAdditem = ({ isOpen, FuncIsOpen, fetchData }: props) => {
   )
 }
 
-export default memo(ModalAdditem)
+export default memo(ModalEditItem)

@@ -20,7 +20,7 @@ const Sidebar: React.FC = () => {
     if (pathname == '/') {
       setPositionBar(dashboardRef.current!.getBoundingClientRect().top)
     }
-    if (pathname == '/produtos') {
+    if (pathname == '/inventario') {
       setPositionBar(productRef.current!.getBoundingClientRect().top)
     }
     if (pathname == '/vendas') {
@@ -71,7 +71,7 @@ const Sidebar: React.FC = () => {
                 </p>
               </li>
             </Link>
-            <Link href="/produtos">
+            <Link href="/inventario">
               <li
                 ref={productRef}
                 className="relative w-full pl-12 flex items-center gap-4 "
@@ -79,14 +79,14 @@ const Sidebar: React.FC = () => {
                 <FiArchive
                   style={{
                     fontSize: '21px',
-                    color: pathname == '/produtos' ? 'blue' : '#808080'
+                    color: pathname == '/inventario' ? 'blue' : '#808080'
                   }}
                 />
                 <p
-                  style={{ color: pathname == '/produtos' ? 'blue' : '#808080' }}
+                  style={{ color: pathname == '/inventario' ? 'blue' : '#808080' }}
                   className="text-lg"
                 >
-                  Produtos
+                  Inventário
                 </p>
               </li>
             </Link>
