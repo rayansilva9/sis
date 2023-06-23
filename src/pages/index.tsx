@@ -7,7 +7,7 @@ export default function Home() {
     <>
       <div
         className="py-2 px-4"
-        style={{ width: 'calc(100vw - 250px) ', height: '100vh', marginLeft: '250px' }}
+        style={{ width: 'calc(100vw - 250px) ', height: '100vh', marginLeft: '270px', background: '#fff', }}
       >
         <div className="w-full flex gap-5">
           <CardDashboardSmall product='XXXXX' percent={0.4} label='Mais Vendidos' />

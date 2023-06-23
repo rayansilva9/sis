@@ -12,7 +12,7 @@ type props = {
 const CardDashboardSmall = ({ width = '250px', label, percent, product }: props) => {
   return (
     <>
-      <div style={{ width: width, background: 'white', border: '2px solid #cccccc89', }} className="h-[200px] rounded-3xl flex flex-col justify-between px-6 py-9">
+      <div style={{ width: width, background: 'white', boxShadow: "-3px 0px 13px #bebebe, 4px 4px 14px #ffffff" }} className="h-[200px] rounded-3xl flex flex-col justify-between px-6 py-9">
         <div className='flex gap-6'>
           <div className='flex items-center py-[8px] px-[8px] rounded-[10px] bg-[#00bfff]' >
             <ImCodepen style={{ fontSize: '22px', color: 'white', }} />

@@ -2,27 +2,31 @@
 @tailwind components;
 @tailwind utilities;
 
+/* reset */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* reset */
 button {
   all: unset;
+}
+
+::-webkit-scrollbar {
+  display: none;
 }
 
 .bar-side::after {
   content: '';
   width: 20px;
   height: 20px;
-  background: rgb(29 78 216);
+  background: #1d4ed8;
   position: absolute;
   right: 0px;
   top: -20px;
   border-bottom-right-radius: 20px;
-  box-shadow: 6px 5px 0 0 white;
+  box-shadow: 6px 5px 0 0 #fff;
 }
 .bar-side::before {
   content: '';
@@ -33,5 +37,5 @@ button {
   right: 0px;
   bottom: -20px;
   border-top-right-radius: 20px;
-  box-shadow: 6px -6px 0 0 white;
+  box-shadow: 6px -6px 0 0 #fff;
 }

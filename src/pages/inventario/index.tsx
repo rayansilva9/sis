@@ -1,9 +1,10 @@
-import React, { useMemo, useState, useCallback, } from 'react'
+import React, { useMemo, useState, useCallback } from 'react'
 import { CiSearch } from 'react-icons/ci'
+import { BsPlusLg } from 'react-icons/bs'
 import { BsArrowRepeat } from 'react-icons/bs'
 import { db } from '@/database/firebase'
-import { DataGrid, GridColDef, } from '@mui/x-data-grid'
-import { Button, } from '@mui/material'
+import { DataGrid, GridColDef } from '@mui/x-data-grid'
+import { Button } from '@mui/material'
 import ModalAdditem from '@/components/ModalAddItem'
 import ModalEditItem from '@/components/ModalEditItem'
 
@@ -31,9 +32,16 @@ const Produtos = () => {
       width: 130,
       align: 'center',
       headerAlign: 'center',
+
       valueFormatter: ({ value }) => CalcPreco(value)
     },
-    { field: 'quantity', headerName: 'Quantidade', width: 160, align: 'center', headerAlign: 'center', },
+    {
+      field: 'quantity',
+      headerName: 'Quantidade',
+      width: 160,
+      align: 'center',
+      headerAlign: 'center'
+    },
     {
       field: 'data',
       headerName: 'Data',
@@ -62,7 +70,8 @@ const Produtos = () => {
             }
           ])
         })
-      }).then(() => setLoading(false))
+      })
+      .then(() => setLoading(false))
   }
 
   const i = useCallback(() => {
@@ -76,15 +85,16 @@ const Produtos = () => {
   const [isAddItem, setIsAddItem] = useState(false)
   const [isEditItem, setIsEditItem] = useState(false)
 
-  const [ProductGetId, setProductGetId] = useState<product[]>([{
-    nome: '',
-    price: 0,
-    data: '',
-    id: 0,
-    quantity: 0,
-    doc: ''
-  }])
-
+  const [ProductGetId, setProductGetId] = useState<product[]>([
+    {
+      nome: '',
+      price: 0,
+      data: '',
+      id: 0,
+      quantity: 0,
+      doc: ''
+    }
+  ])
 
   const getItemById = (e: number) => {
     const result = products.filter(w => w.id == e)
@@ -108,19 +118,27 @@ const Produtos = () => {
     return f2
   }, [])
 
-
   return (
     <>
       <ModalAdditem fetchData={i} FuncIsOpen={setIsAddItem} isOpen={isAddItem} />
-      <ModalEditItem fetchData={i} ItemPrice={ProductGetId![0].price} ItemQuantity={ProductGetId![0].quantity} ItemDocId={ProductGetId![0].doc} ItemName={ProductGetId![0].nome} ItemId={ProductGetId![0].id} FuncIsOpen={setIsEditItem} isOpen={isEditItem} />
+      <ModalEditItem
+        fetchData={i}
+        ItemPrice={ProductGetId![0].price}
+        ItemQuantity={ProductGetId![0].quantity}
+        ItemDocId={ProductGetId![0].doc}
+        ItemName={ProductGetId![0].nome}
+        ItemId={ProductGetId![0].id}
+        FuncIsOpen={setIsEditItem}
+        isOpen={isEditItem}
+      />
       <div
         className="py-2 px-4"
-        style={{ width: 'calc(100vw - 400px) ', height: '100vh', marginLeft: '250px' }}
+        style={{ width: 'calc(100vw - 400px) ', height: '100vh', marginLeft: '270px' }}
       >
         <div style={{ width: 'calc(100%)' }} className="flex my-2">
           <div className="w-[100px]">
             <select
-              style={{ height: '100%', border: '1px solid #ccccccb1', padding: '0 4px', }}
+              style={{ height: '100%', border: '1px solid #ccccccb1', padding: '0 4px' }}
               value={select}
               onChange={({ target }) => {
                 setSelect(target.value)
@@ -135,18 +153,17 @@ const Produtos = () => {
             style={{ border: '1px solid #ccccccb1' }}
             className="flex gap-2 items-center px-4 w-full"
           >
-            <CiSearch style={{ fontSize: '20px', color: 'blue', strokeWidth: 1 }} />
+            <CiSearch style={{ fontSize: '20px', color: 'blue', strokeWidth: 0 }} />
             <input
               type="text"
               onChange={({ target }) => {
-                setFind(target.value),
-                  FindProduct()
+                setFind(target.value), FindProduct()
               }}
-              style={{ padding: '4px 4px', flex: 1, outline: 'none' }}
+              style={{ padding: '4px 4px', flex: 1, outline: 'none', }}
               placeholder="Procurar produto..."
             />
           </div>
-          <div className='flex'>
+          <div className="flex">
             <Button
               onClick={() => setIsAddItem(true)}
               sx={{
@@ -154,7 +171,7 @@ const Produtos = () => {
               }}
               variant="outlined"
             >
-              Add
+              <BsPlusLg style={{ fontSize: '22px' }} />
             </Button>
             <Button
               onClick={() => i()}
@@ -163,13 +180,13 @@ const Produtos = () => {
               }}
               variant="outlined"
             >
-              <BsArrowRepeat style={{fontSize:'22px',}} />
+              <BsArrowRepeat style={{ fontSize: '22px' }} />
             </Button>
           </div>
         </div>
         <div style={{ flex: 1, width: '100%' }}>
           <DataGrid
-            onCellClick={(e) => getItemById(e.id as unknown as number)}
+            onCellClick={e => getItemById(e.id as unknown as number)}
             rows={find != '' ? alternate : products}
             loading={loading}
             columns={columns}
