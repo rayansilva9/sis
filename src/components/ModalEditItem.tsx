@@ -10,9 +10,10 @@ type props = {
   ItemQuantity: number
   ItemId: string | number
   fetchData: () => void
+  ItemDocId: string
 }
 
-const ModalEditItem = ({ isOpen, FuncIsOpen, ItemName, ItemPrice, ItemQuantity, ItemId, fetchData }: props) => {
+const ModalEditItem = ({ isOpen, FuncIsOpen, ItemName, ItemPrice, ItemQuantity, ItemId, fetchData, ItemDocId }: props) => {
 
   const NomeInpRef = useRef<TextFieldProps | null>(null)
   const QuantityInpRef = useRef<TextFieldProps | null>(null)
@@ -30,28 +31,21 @@ const ModalEditItem = ({ isOpen, FuncIsOpen, ItemName, ItemPrice, ItemQuantity, 
     const date = Date.now()
 
     try {
-      await db
-        .collection('inventary')
-        .where('id', '==', ItemId).get()
-        .then((querySnapshot) => {
-          querySnapshot.forEach((doc) => {
-            doc.ref.update({
-              nome,
-              price,
-              data: new Date(date).toISOString(),
-              quantity,
-            })
-              .then(() => {
-                console.log('Documento editado com sucesso!');
-              })
-              .catch((error) => {
-                console.error('Erro ao editar documento:', error);
-              });
-          });
-        }).then(() => {
+      const docRef = db.collection('inventary').doc(ItemDocId);
+
+      await docRef.update({
+        nome,
+        price,
+        data: new Date(date).toISOString(),
+        quantity,
+      })
+        .then(() => {
           FuncIsOpen(false)
           fetchData()
         })
+        .catch((error) => {
+          console.error('Erro ao atualizar o documento:', error);
+        });
     } catch (error) {
       alert(error)
     } finally {
@@ -60,6 +54,7 @@ const ModalEditItem = ({ isOpen, FuncIsOpen, ItemName, ItemPrice, ItemQuantity, 
       setLoading(false)
     }
   }
+
 
   return (
     <>
@@ -100,7 +95,6 @@ const ModalEditItem = ({ isOpen, FuncIsOpen, ItemName, ItemPrice, ItemQuantity, 
                   />
                   <TextField
                     defaultValue={ItemPrice}
-
                     ref={PriceInpRef as unknown as any}
                     onChange={({ target }) => setPrice(parseFloat(target.value))}
                     type="text"

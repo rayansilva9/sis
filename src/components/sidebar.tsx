@@ -37,16 +37,19 @@ const Sidebar: React.FC = () => {
 
   return (
     <>
-      <div className="fixed left-0 top-0 h-screen w-[250px] flex flex-col items-center pb-12 pt-[120px] bg-white">
+      <div className="fixed left-0 top-0 h-screen w-[250px] flex flex-col items-center pb-12 pt-[120px] bg-blue-700">
         <div
+          className='bar-side'
           style={{
-            width: '5px',
+            marginLeft: '10%',
+            width: '90%',
             height: '40px',
-            background: 'blue',
+            background: 'white',
             position: 'absolute',
             left: '0',
             top: positionBar - 5,
-            borderRadius: '50px',
+            borderTopLeftRadius: '50px',
+            borderBottomLeftRadius: '50px',
             transition: 'top .2s linear'
           }}
         ></div>
@@ -60,11 +63,14 @@ const Sidebar: React.FC = () => {
                 <FiGrid
                   style={{
                     fontSize: '22px',
-                    color: pathname == '/' ? 'blue' : '#808080'
+                    color: pathname == '/' ? 'blue' : '#fff',
+                    transition: 'color .2s linear'
                   }}
                 />
                 <p
-                  style={{ color: pathname == '/' ? 'blue' : '#808080' }}
+                  style={{
+                    color: pathname == '/' ? 'blue' : '#fff', transition: 'color .2s linear'
+                  }}
                   className="font-normal text-lg"
                 >
                   Dashboard
@@ -79,11 +85,14 @@ const Sidebar: React.FC = () => {
                 <FiArchive
                   style={{
                     fontSize: '21px',
-                    color: pathname == '/inventario' ? 'blue' : '#808080'
+                    color: pathname == '/inventario' ? 'blue' : '#fff', transition: 'color .2s linear'
+
                   }}
                 />
                 <p
-                  style={{ color: pathname == '/inventario' ? 'blue' : '#808080' }}
+                  style={{
+                    color: pathname == '/inventario' ? 'blue' : '#fff', transition: 'color .2s linear'
+                  }}
                   className="text-lg"
                 >
                   Inventário
@@ -98,11 +107,14 @@ const Sidebar: React.FC = () => {
                 <FiDollarSign
                   style={{
                     fontSize: '22px',
-                    color: pathname == '/vendas' ? 'blue' : '#808080'
+                    color: pathname == '/vendas' ? 'blue' : '#fff', transition: 'color .2s linear'
+
                   }}
                 />
                 <p
-                  style={{ color: pathname == '/vendas' ? 'blue' : '#808080' }}
+                  style={{
+                    color: pathname == '/vendas' ? 'blue' : '#fff', transition: 'color .2s linear'
+                  }}
                   className="text-lg"
                 >
                   Vendas
@@ -117,11 +129,14 @@ const Sidebar: React.FC = () => {
                 <FiSettings
                   style={{
                     fontSize: '22px',
-                    color: pathname == '/configurar' ? 'blue' : '#808080'
+                    color: pathname == '/configurar' ? 'blue' : '#fff', transition: 'color .2s linear'
+
                   }}
                 />
                 <p
-                  style={{ color: pathname == '/configurar' ? 'blue' : '#808080' }}
+                  style={{
+                    color: pathname == '/configurar' ? 'blue' : '#fff', transition: 'color .2s linear'
+                  }}
                   className="text-lg"
                 >
                   Configurações

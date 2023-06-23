@@ -8,9 +8,30 @@
   box-sizing: border-box;
 }
 
-
 /* reset */
 button {
   all: unset;
 }
 
+.bar-side::after {
+  content: '';
+  width: 20px;
+  height: 20px;
+  background: rgb(29 78 216);
+  position: absolute;
+  right: 0px;
+  top: -20px;
+  border-bottom-right-radius: 20px;
+  box-shadow: 6px 5px 0 0 white;
+}
+.bar-side::before {
+  content: '';
+  width: 20px;
+  height: 20px;
+  background: rgb(29 78 216);
+  position: absolute;
+  right: 0px;
+  bottom: -20px;
+  border-top-right-radius: 20px;
+  box-shadow: 6px -6px 0 0 white;
+}

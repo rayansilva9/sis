@@ -1,5 +1,6 @@
 import React, { useMemo, useState, useCallback, } from 'react'
 import { CiSearch } from 'react-icons/ci'
+import { BsArrowRepeat } from 'react-icons/bs'
 import { db } from '@/database/firebase'
 import { DataGrid, GridColDef, } from '@mui/x-data-grid'
 import { Button, } from '@mui/material'
@@ -12,6 +13,7 @@ type product = {
   data: string
   id: string | number
   quantity: number
+  doc: string
 }
 
 const Produtos = () => {
@@ -56,6 +58,7 @@ const Produtos = () => {
               price: doc.data().price,
               data: doc.data().data,
               quantity: doc.data().quantity,
+              doc: doc.id
             }
           ])
         })
@@ -78,7 +81,8 @@ const Produtos = () => {
     price: 0,
     data: '',
     id: 0,
-    quantity: 0
+    quantity: 0,
+    doc: ''
   }])
 
 
@@ -108,7 +112,7 @@ const Produtos = () => {
   return (
     <>
       <ModalAdditem fetchData={i} FuncIsOpen={setIsAddItem} isOpen={isAddItem} />
-      <ModalEditItem fetchData={i} ItemPrice={ProductGetId![0].price} ItemQuantity={ProductGetId![0].quantity} ItemName={ProductGetId![0].nome} ItemId={ProductGetId![0].id} FuncIsOpen={setIsEditItem} isOpen={isEditItem} />
+      <ModalEditItem fetchData={i} ItemPrice={ProductGetId![0].price} ItemQuantity={ProductGetId![0].quantity} ItemDocId={ProductGetId![0].doc} ItemName={ProductGetId![0].nome} ItemId={ProductGetId![0].id} FuncIsOpen={setIsEditItem} isOpen={isEditItem} />
       <div
         className="py-2 px-4"
         style={{ width: 'calc(100vw - 400px) ', height: '100vh', marginLeft: '250px' }}
@@ -142,7 +146,7 @@ const Produtos = () => {
               placeholder="Procurar produto..."
             />
           </div>
-          <div>
+          <div className='flex'>
             <Button
               onClick={() => setIsAddItem(true)}
               sx={{
@@ -151,6 +155,15 @@ const Produtos = () => {
               variant="outlined"
             >
               Add
+            </Button>
+            <Button
+              onClick={() => i()}
+              sx={{
+                marginLeft: '10px'
+              }}
+              variant="outlined"
+            >
+              <BsArrowRepeat style={{fontSize:'22px',}} />
             </Button>
           </div>
         </div>
