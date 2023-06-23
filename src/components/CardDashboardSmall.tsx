@@ -1,5 +1,7 @@
 import { ImCodepen } from 'react-icons/im';
 import { IoTrendingUp } from 'react-icons/io5';
+import { memo } from 'react'
+
 
 
 type props = {
@@ -31,4 +33,4 @@ const CardDashboardSmall = ({ width = '250px', label, percent, product }: props)
   );
 }
 
-export default CardDashboardSmall;
+export default memo(CardDashboardSmall);

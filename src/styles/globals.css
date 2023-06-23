@@ -28,6 +28,7 @@ button {
   border-bottom-right-radius: 20px;
   box-shadow: 6px 5px 0 0 #fff;
 }
+
 .bar-side::before {
   content: '';
   width: 20px;

@@ -113,7 +113,7 @@ const Produtos = () => {
     setAlternate(result)
   }
 
-  const CalcPreco = useCallback((preco: Number) => {
+  const CalcPreco = useCallback((preco: number) => {
     var f2 = preco.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })
     return f2
   }, [])
@@ -133,7 +133,7 @@ const Produtos = () => {
       />
       <div
         className="py-2 px-4"
-        style={{ width: 'calc(100vw - 400px) ', height: '100vh', marginLeft: '270px' }}
+        style={{ width: 'calc(100vw - 400px)', height: '100vh', marginLeft: '270px' }}
       >
         <div style={{ width: 'calc(100%)' }} className="flex my-2">
           <div className="w-[100px]">
@@ -159,7 +159,7 @@ const Produtos = () => {
               onChange={({ target }) => {
                 setFind(target.value), FindProduct()
               }}
-              style={{ padding: '4px 4px', flex: 1, outline: 'none', }}
+              style={{ padding: '4px 4px', flex: 1, outline: 'none' }}
               placeholder="Procurar produto..."
             />
           </div>

@@ -4,7 +4,7 @@ import { FiSettings } from 'react-icons/fi'
 import { FiArchive } from 'react-icons/fi'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { useEffect, useRef, useState, memo } from 'react'
+import { useRef, useState, memo, useEffect } from 'react'
 
 const Sidebar: React.FC = () => {
   const pathname = useRouter().pathname
@@ -17,17 +17,26 @@ const Sidebar: React.FC = () => {
   const [positionBar, setPositionBar] = useState(0)
 
   function updateBar() {
-    if (pathname == '/') {
-      setPositionBar(dashboardRef.current!.getBoundingClientRect().top)
-    }
-    if (pathname == '/inventario') {
-      setPositionBar(productRef.current!.getBoundingClientRect().top)
-    }
-    if (pathname == '/vendas') {
-      setPositionBar(salesRef.current!.getBoundingClientRect().top)
-    }
-    if (pathname == '/configurar') {
-      setPositionBar(settingsRef.current!.getBoundingClientRect().top)
+    switch (pathname) {
+      case '/':
+        setPositionBar(dashboardRef.current!.getBoundingClientRect().top)
+
+        break
+      case '/inventario':
+        setPositionBar(productRef.current!.getBoundingClientRect().top)
+
+        break
+      case 'vendas':
+        setPositionBar(salesRef.current!.getBoundingClientRect().top)
+
+        break
+      case 'configurar':
+        setPositionBar(settingsRef.current!.getBoundingClientRect().top)
+
+        break
+
+      default:
+        break
     }
   }
 
@@ -39,7 +48,7 @@ const Sidebar: React.FC = () => {
     <>
       <div className="fixed left-0 top-0 h-screen w-[250px] flex flex-col items-center pb-12 pt-[120px] bg-blue-700">
         <div
-          className='bar-side'
+          className="bar-side"
           style={{
             marginLeft: '10%',
             width: '90%',
@@ -55,11 +64,8 @@ const Sidebar: React.FC = () => {
         ></div>
         <div className="relative w-full">
           <ul className="w-full  flex flex-col gap-6">
-            <li
-              ref={dashboardRef}
-            >
-              <Link className="relative w-full pl-12 flex items-center gap-4 "
-                href="/">
+            <li ref={dashboardRef}>
+              <Link className="relative w-full pl-12 flex items-center gap-4 " href="/">
                 <FiGrid
                   style={{
                     fontSize: '22px',
@@ -69,7 +75,8 @@ const Sidebar: React.FC = () => {
                 />
                 <p
                   style={{
-                    color: pathname == '/' ? 'blue' : '#fff', transition: 'color .35s ease'
+                    color: pathname == '/' ? 'blue' : '#fff',
+                    transition: 'color .35s ease'
                   }}
                   className="font-normal text-lg"
                 >
@@ -77,21 +84,22 @@ const Sidebar: React.FC = () => {
                 </p>
               </Link>
             </li>
-            <li
-              ref={productRef}
-
-            >
-              <Link className="relative w-full pl-12 flex items-center gap-4 " href="/inventario">
+            <li ref={productRef}>
+              <Link
+                className="relative w-full pl-12 flex items-center gap-4 "
+                href="/inventario"
+              >
                 <FiArchive
                   style={{
                     fontSize: '21px',
-                    color: pathname == '/inventario' ? 'blue' : '#fff', transition: 'color .35s ease'
-
+                    color: pathname == '/inventario' ? 'blue' : '#fff',
+                    transition: 'color .35s ease'
                   }}
                 />
                 <p
                   style={{
-                    color: pathname == '/inventario' ? 'blue' : '#fff', transition: 'color .35s ease'
+                    color: pathname == '/inventario' ? 'blue' : '#fff',
+                    transition: 'color .35s ease'
                   }}
                   className="text-lg"
                 >
@@ -99,20 +107,22 @@ const Sidebar: React.FC = () => {
                 </p>
               </Link>
             </li>
-            <li
-              ref={salesRef}
-            >
-              <Link className="relative w-full pl-12 flex items-center gap-4 " href="/vendas">
+            <li ref={salesRef}>
+              <Link
+                className="relative w-full pl-12 flex items-center gap-4 "
+                href="/vendas"
+              >
                 <FiDollarSign
                   style={{
                     fontSize: '22px',
-                    color: pathname == '/vendas' ? 'blue' : '#fff', transition: 'color .35s ease'
-
+                    color: pathname == '/vendas' ? 'blue' : '#fff',
+                    transition: 'color .35s ease'
                   }}
                 />
                 <p
                   style={{
-                    color: pathname == '/vendas' ? 'blue' : '#fff', transition: 'color .35s ease'
+                    color: pathname == '/vendas' ? 'blue' : '#fff',
+                    transition: 'color .35s ease'
                   }}
                   className="text-lg"
                 >
@@ -120,21 +130,22 @@ const Sidebar: React.FC = () => {
                 </p>
               </Link>
             </li>
-            <li
-              ref={settingsRef}
-            >
-              <Link className="relative w-full pl-12 flex items-center gap-4 "
-                href="/configurar">
+            <li ref={settingsRef}>
+              <Link
+                className="relative w-full pl-12 flex items-center gap-4 "
+                href="/configurar"
+              >
                 <FiSettings
                   style={{
                     fontSize: '22px',
-                    color: pathname == '/configurar' ? 'blue' : '#fff', transition: 'color .35s ease'
-
+                    color: pathname == '/configurar' ? 'blue' : '#fff',
+                    transition: 'color .35s ease'
                   }}
                 />
                 <p
                   style={{
-                    color: pathname == '/configurar' ? 'blue' : '#fff', transition: 'color .35s ease'
+                    color: pathname == '/configurar' ? 'blue' : '#fff',
+                    transition: 'color .35s ease'
                   }}
                   className="text-lg"
                 >
