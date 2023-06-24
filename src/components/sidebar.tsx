@@ -26,11 +26,11 @@ const Sidebar: React.FC = () => {
         setPositionBar(productRef.current!.getBoundingClientRect().top)
 
         break
-      case 'vendas':
+      case '/vendas':
         setPositionBar(salesRef.current!.getBoundingClientRect().top)
 
         break
-      case 'configurar':
+      case '/configurar':
         setPositionBar(settingsRef.current!.getBoundingClientRect().top)
 
         break

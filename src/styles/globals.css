@@ -40,3 +40,47 @@ button {
   border-top-right-radius: 20px;
   box-shadow: 6px -6px 0 0 #fff;
 }
+
+.skill {
+  width: 160px;
+  height: 160px;
+  position: relative;
+}
+
+.outer {
+  height: 160px;
+  width: 160px;
+  border-radius: 50%;
+  border: 1px solid white;
+  padding: 20px;
+  box-shadow: 5px 5px 10px #cecece, -5px -5px 10px #f2f2f2;
+}
+
+.inner {
+  height: 120px;
+  width: 120px;
+  border-radius: 50%;
+  border: 1px solid white;
+  box-shadow: inset -5px -5px 10px #cecece, inset 5px 5px 10px #f2f2f2;
+}
+
+#circle {
+  fill: none;
+  stroke: url(#GradientColor);
+  stroke-width: 20px;
+  stroke-dasharray: 439;
+  stroke-dashoffset: 439;
+  animation: cirlceAnime 2s ease-in-out forwards;
+}
+
+@keyframes cirlceAnime {
+  100% {
+    stroke-dashoffset: calc(439 / 100 * 50 );
+  }
+}
+
+#svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
