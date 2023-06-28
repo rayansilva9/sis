@@ -1,9 +1,9 @@
-const Vendas = () => {
-  return ( 
+const Sales = () => {
+  return (
     <>
-      vendaskkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk
+
     </>
-   );
+  );
 }
- 
-export default Vendas;
+
+export default Sales;

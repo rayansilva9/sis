@@ -1,9 +1,9 @@
-const Configurar = () => {
+const SettingsPage = () => {
   return (
     <>
-      settingsssssssssssssssssssss
+      settings
     </>
   );
 }
 
-export default Configurar;
+export default SettingsPage;

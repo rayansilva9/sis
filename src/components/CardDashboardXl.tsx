@@ -1,6 +1,7 @@
-import { memo } from 'react'
+import { memo, useContext } from 'react'
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
+import { ThemeContext } from '@/context/themeContext';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 const CardDashboardXL = () => {
@@ -33,12 +34,14 @@ const CardDashboardXL = () => {
     ],
   };
 
+  const { theme, changeTheme } = useContext(ThemeContext)
+
 
   return (
     <>
       <div
-        style={{ background: '#fff', border:'1px solid white', }}
-        className="w-[520px] h-[420px] flex justify-center rounded-3xl bg-green-600 pt-9"
+        style={{ background: theme == 'light' ? 'white' : 'black', }}
+        className="md:w-[auto] lg:w-[430px] h-[420px] flex justify-center rounded-3xl bg-green-600 pt-9"
       >
         <Doughnut data={data} />
       </div>

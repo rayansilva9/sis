@@ -1,4 +1,4 @@
-import { memo } from 'react'
+import { memo, useContext } from 'react'
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -10,8 +10,7 @@ import {
   Legend,
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
-import { faker } from '@faker-js/faker'
-
+import { ThemeContext } from '@/context/themeContext';
 
 ChartJS.register(
   CategoryScale,
@@ -44,24 +43,30 @@ const CardDashboardLarge = () => {
     datasets: [
       {
         label: 'Dataset 1',
-        data: labels.map(() => faker.datatype.number({ min: -1000, max: 1000 })),
+        data: [12, 54, 76, 12, 54, 12, 87],
         borderColor: 'rgb(255, 99, 132)',
         backgroundColor: 'rgba(255, 99, 132, 0.5)',
       },
       {
         label: 'Dataset 2',
-        data: labels.map(() => faker.datatype.number({ min: -1000, max: 1000 })),
+        data: [90, 12, 34, 76, 23, 37, 79],
         borderColor: 'rgb(53, 162, 235)',
         backgroundColor: 'rgba(53, 162, 235, 0.5)',
       },
     ],
   };
 
+  const { theme, changeTheme } = useContext(ThemeContext)
+
+
   return (
     <>
-      <div style={{
-        background: '#fff', boxShadow: "-9px 0px 18px #bebebe,9px 9px 18px #ffffff",
-      }} className="w-[520px] h-[200px] rounded-3xl ">
+      <div className="md:w-[auto] h-[200px] lg:w-[550px] rounded-xl px-4 "
+        style={{
+          cursor: 'crosshair',
+          background: theme == 'light' ? 'white' : 'black',
+          boxShadow: `-9px 0px 18px ${theme == 'light' ? 'white' : 'red'},9px 9px 18px ${theme == 'light' ? 'white' : 'red'},`,
+        }}>
         <Line width={undefined} height={undefined} options={options} data={data} />
       </div>
     </>

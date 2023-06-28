@@ -1,7 +1,8 @@
 import { ReactNode } from "react";
-import Sidebar from "./sidebar";
-import Header from "./header";
 import { Roboto } from "next/font/google";
+import Sidebar from "./sidebar";
+import NavBarMobile from "./navBarMobile";
+import Header from "./header";
 
 type props = {
   children: ReactNode
@@ -20,8 +21,9 @@ const Layout: React.FC<props> = ({ children }) => {
   return (
     <>
       <main className={roboto.className}>
-        <Header />
         <Sidebar />
+        <Header />
+        <NavBarMobile />
         {children}
       </main>
     </>

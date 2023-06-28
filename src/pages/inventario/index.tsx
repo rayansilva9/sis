@@ -1,12 +1,13 @@
-import React, { useMemo, useState, useCallback } from 'react'
+import React, { useMemo, useState, useCallback, useContext } from 'react'
 import { CiSearch } from 'react-icons/ci'
 import { BsPlusLg } from 'react-icons/bs'
 import { BsArrowRepeat } from 'react-icons/bs'
 import { db } from '@/database/firebase'
 import { DataGrid, GridColDef } from '@mui/x-data-grid'
 import { Button } from '@mui/material'
-import ModalAdditem from '@/components/ModalAddItem'
-import ModalEditItem from '@/components/ModalEditItem'
+import { ThemeContext } from '@/context/themeContext'
+// import ModalAdditem from '@/components/ModalAddItem'
+// import ModalEditItem from '@/components/ModalEditItem'
 
 type product = {
   nome: string
@@ -18,6 +19,10 @@ type product = {
 }
 
 const Produtos = () => {
+  const { theme, changeTheme } = useContext(ThemeContext)
+
+
+
   const [select, setSelect] = useState<number | string>(0)
   const [products, setProducts] = useState<product[]>([])
   const [loading, setLoading] = useState(false)
@@ -32,8 +37,7 @@ const Produtos = () => {
       width: 130,
       align: 'center',
       headerAlign: 'center',
-
-      valueFormatter: ({ value }) => CalcPreco(value)
+      valueFormatter: ({ value }) => `R$ ${formatarMoeda(value)}`
     },
     {
       field: 'quantity',
@@ -118,9 +122,24 @@ const Produtos = () => {
     return f2
   }, [])
 
+  function formatarMoeda(valor: number | string) {
+
+    valor = valor + '';
+    valor = parseInt(valor.replace(/[\D]+/g, ''));
+    valor = valor + '';
+    valor = valor.replace(/([0-9]{2})$/g, ",$1");
+
+    if (valor.length > 6) {
+      valor = valor.replace(/([0-9]{3}),([0-9]{2}$)/g, ".$1,$2");
+    }
+
+    return valor
+
+  }
+
   return (
     <>
-      <ModalAdditem fetchData={i} FuncIsOpen={setIsAddItem} isOpen={isAddItem} />
+      {/* <ModalAdditem fetchData={i} FuncIsOpen={setIsAddItem} isOpen={isAddItem} />
       <ModalEditItem
         fetchData={i}
         ItemPrice={ProductGetId![0].price}
@@ -130,13 +149,12 @@ const Produtos = () => {
         ItemId={ProductGetId![0].id}
         FuncIsOpen={setIsEditItem}
         isOpen={isEditItem}
-      />
+      /> */}
       <div
-        className="py-2 px-4"
-        style={{ width: 'calc(100vw - 400px)', height: '100vh', marginLeft: '270px' }}
+        className="py-2 px-2 w-full md:w-[calc(100%-100px)] lg:w-[calc(100%-80px)] md:pl-[130px] lg:pl-[300px]"
       >
-        <div style={{ width: 'calc(100%)' }} className="flex my-2">
-          <div className="w-[100px]">
+        <div className="flex my-2">
+          <div className="hidden w-[100px]">
             <select
               style={{ height: '100%', border: '1px solid #ccccccb1', padding: '0 4px' }}
               value={select}
@@ -159,7 +177,10 @@ const Produtos = () => {
               onChange={({ target }) => {
                 setFind(target.value), FindProduct()
               }}
-              style={{ padding: '4px 4px', flex: 1, outline: 'none' }}
+              style={{
+                padding: '4px 4px', flex: 1, outline: 'none',
+                background: theme == 'light' ? 'white' : 'black',
+              }}
               placeholder="Procurar produto..."
             />
           </div>
@@ -167,7 +188,7 @@ const Produtos = () => {
             <Button
               onClick={() => setIsAddItem(true)}
               sx={{
-                marginLeft: '10px'
+                marginLeft: { xs: '5px' }
               }}
               variant="outlined"
             >
@@ -176,7 +197,7 @@ const Produtos = () => {
             <Button
               onClick={() => i()}
               sx={{
-                marginLeft: '10px'
+                marginLeft: { xs: '5px' }
               }}
               variant="outlined"
             >
@@ -186,6 +207,12 @@ const Produtos = () => {
         </div>
         <div style={{ flex: 1, width: '100%' }}>
           <DataGrid
+            sx={{
+              transition: 'color 0.3s linear',
+              color: theme == 'light' ? 'black' : 'white',
+              border: theme == 'light' ? '1px solid #ccccccaa' : '1px solid #ccccccaa',
+
+            }}
             onCellClick={e => getItemById(e.id as unknown as number)}
             rows={find != '' ? alternate : products}
             loading={loading}
@@ -199,7 +226,7 @@ const Produtos = () => {
             pageSizeOptions={[5, 10, 50]}
           />
         </div>
-      </div>
+      </div >
     </>
   )
 }
