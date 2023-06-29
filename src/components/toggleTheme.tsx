@@ -8,7 +8,7 @@ const ToggleTheme: React.FC = () => {
   return (
     <>
       <label className="switch absolute bottom-5">
-        <input onClick={() => { changeTheme() }} checked={theme == 'light' ? true : false} type="checkbox" />
+        <input onClick={() => { theme == 'light' ? changeTheme('dark') : changeTheme('light') }} checked={theme == 'light' ? true : false} type="checkbox" />
         <span className="slider"></span>
       </label>
     </>

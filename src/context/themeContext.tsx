@@ -3,7 +3,7 @@ import React, { createContext, useState, ReactNode, SetStateAction, Dispatch, us
 
 type ProviderProps = {
   theme: string
-  changeTheme: Dispatch<SetStateAction<string>>
+  changeTheme: Dispatch<SetStateAction<themeProps>>
 }
 type themeProps = "light" | "dark"
 
