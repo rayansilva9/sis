@@ -7,7 +7,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  transition: all 0.3s linear;
+  /* transition: all 0.3s linear; */
 }
 
 button {
@@ -18,7 +18,7 @@ button {
   display: none;
 }
 
-.bar-side::after {
+/* .bar-side::after {
   content: '';
   width: 20px;
   height: 20px;
@@ -40,7 +40,7 @@ button {
   bottom: -20px;
   border-top-right-radius: 20px;
   box-shadow: 6px -6px 0 0 #fff;
-}
+} */
 
 .skill {
   width: 160px;

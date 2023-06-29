@@ -15,7 +15,7 @@ export const TrackSideBar = styled.div<Props>`
   top: ${props => props.top - 7 + 'px'};
   border-top-left-radius: 50px;
   border-bottom-left-radius: 50px;
-  transition: top 0.2s linear;
+  transition: top 0.2s linear  !important;
   transition: background 0.3s linear;
 
   @media (min-width: 768px) {
