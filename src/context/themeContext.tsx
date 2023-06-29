@@ -7,24 +7,31 @@ type ProviderProps = {
 }
 type themeProps = "light" | "dark"
 
-export const ThemeContext = createContext<ProviderProps | null>(null)
+type themeProviderProps = { children: ReactNode }
 
-export const ThemeContextProvider = ({ children }: { children: ReactNode }) => {
+const DefaultValue = {
+  theme: 'light',
+  changeTheme: () => { }
+}
 
-  const [theme, setTheme] = useState<themeProps>('dark')
+
+
+export const ThemeContext = createContext<ProviderProps>(DefaultValue)
+
+export const ThemeContextProvider: React.FC<themeProviderProps> = ({ children }) => {
+
+  const [theme, setTheme] = useState<themeProps>('light')
 
   useEffect(() => {
     window.document.getElementsByTagName('html')[0].style.background = theme == 'light' ? 'white' : 'black'
   }, [theme])
 
   const changeTheme = () => {
-
     if (theme == 'light') {
       setTheme('dark')
     } else {
       setTheme('light')
     }
-
   }
 
 
