@@ -1,5 +1,5 @@
 // @ts-ignore
-import Layout from '../components/Layout'
+import Layout from '@/components/layout'
 import { ThemeContextProvider } from '@/context/themeContext'
 import '@/styles/globals.css'
 import type { AppProps } from 'next/app'
