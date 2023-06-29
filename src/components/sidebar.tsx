@@ -47,10 +47,9 @@ const Sidebar = () => {
 
   useEffect(() => {
     updateBar()
-    console.log(positionBar)
   }, [pathname])
 
-  const { theme, changeTheme } = useContext(ThemeContext)
+  const { theme } = useContext(ThemeContext)
 
 
   return (

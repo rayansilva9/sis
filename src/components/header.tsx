@@ -28,7 +28,7 @@ const Header = () => {
         <div className="">
           <form className="flex items-center">
             <input style={{ background: theme == 'light' ? 'white' : 'black', color: theme == 'light' ? 'black' : 'white', }} className='hidden md:inline border border-blue-500 rounded-md h-[40px] px-4' placeholder="Procurar..." />
-            <Button variant="outlined" sx={{ height: '40px', }}>
+            <Button onClick={() => { theme == 'light' ? changeTheme('dark') : changeTheme('light') }} variant="outlined" sx={{ height: '40px', }}>
               <CiSearch style={{ fontSize: '25px', color: 'inherit', strokeWidth: 0 }} />
             </Button>
           </form>
