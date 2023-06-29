@@ -1,3 +1,4 @@
+// @ts-ignore
 import Layout from '../components/Layout'
 import { ThemeContextProvider } from '@/context/themeContext'
 import '@/styles/globals.css'

@@ -1,3 +1,4 @@
+// @ts-ignore
 import { ReactNode } from "react";
 import { Roboto } from "next/font/google";
 import Sidebar from "./sidebar";
@@ -14,8 +15,6 @@ const roboto = Roboto({
 })
 
 const Layout: React.FC<props> = ({ children }) => {
-
-
 
 
   return (
