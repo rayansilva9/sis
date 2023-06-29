@@ -62,7 +62,7 @@ const NavBarMobile = () => {
               <FiGrid style={{ fontSize: '26px', color: theme == 'light' ? 'black' : 'white', }} />
             </Link>
           </li>
-          <li style={{ top: pathname == '/invetario' ? '-20px' : 0, transition: 'top 0.3s linear', color: theme == 'light' ? 'black' : 'white', }} ref={productRef} className='z-[91] relative'> <Link href="/inventario">
+          <li style={{ top: pathname == '/inventario' ? '-20px' : 0, transition: 'top 0.3s linear', color: theme == 'light' ? 'black' : 'white', }} ref={productRef} className='z-[91] relative'> <Link href="/inventario">
             <FiArchive style={{ fontSize: '26px', }} />
           </Link></li>
           <li style={{ top: pathname == '/vendas' ? '-20px' : 0, transition: 'top 0.3s linear', color: theme == 'light' ? 'black' : 'white', }} ref={salesRef} className='z-[91] relative'> <Link href="/vendas">
