@@ -1,4 +1,4 @@
-import React, { useMemo, useState, useCallback, useContext } from 'react'
+import React, { useMemo, useState, useCallback, useContext, useEffect } from 'react'
 import { CiSearch } from 'react-icons/ci'
 import { BsPlusLg } from 'react-icons/bs'
 import { BsArrowRepeat } from 'react-icons/bs'
@@ -7,8 +7,6 @@ import { DataGrid, GridColDef } from '@mui/x-data-grid'
 import { Button } from '@mui/material'
 import { ThemeContext } from '@/context/themeContext'
 import AddItemModal from '@/components/AddItemModal'
-// import ModalAdditem from '@/components/ModalAddItem'
-// import ModalEditItem from '@/components/ModalEditItem'
 
 type product = {
   nome: string
@@ -20,7 +18,7 @@ type product = {
 }
 
 const Produtos = () => {
-  const { theme, changeTheme } = useContext(ThemeContext)
+  const { theme } = useContext(ThemeContext)
 
 
 
@@ -141,6 +139,29 @@ const Produtos = () => {
     return valor
 
   }
+
+  const ToolBarGrid = window.document.querySelector('.MuiToolbar-root')! as HTMLElement
+  ToolBarGrid ? (ToolBarGrid.style.color = theme == 'light' ? 'black' : 'white') : null
+
+  const ToolBarGridIconPaginatio = window.document.querySelector(
+    '[data-testid="ArrowDropDownIcon"]'
+  )! as HTMLElement
+  ToolBarGridIconPaginatio
+    ? (ToolBarGridIconPaginatio.style.color = theme == 'light' ? 'black' : '#ccc')
+    : null
+
+  const ToolBarGridIconHeader = window.document.querySelectorAll(
+    '[data-testid="TripleDotsVerticalIcon"]'
+  )! as unknown as HTMLElement[]
+
+  for (let index = 0; index < ToolBarGridIconHeader.length; index++) {
+    ToolBarGridIconHeader[index].style.color = theme == 'light' ? 'black' : '#ccc'
+  }
+
+
+  // useEffect(() => {
+
+  // }, [])
 
   return (
     <>

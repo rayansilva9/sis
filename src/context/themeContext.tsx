@@ -29,24 +29,6 @@ export const ThemeContextProvider: React.FC<themeProviderProps> = ({ children })
     window.document.getElementsByTagName('html')[0].style.background =
       theme == 'light' ? 'white' : 'black'
 
-    const ToolBarGrid = window.document.querySelector('.MuiToolbar-root')! as HTMLElement
-    ToolBarGrid ? (ToolBarGrid.style.color = theme == 'light' ? 'black' : 'white') : null
-
-    const ToolBarGridIconPaginatio = window.document.querySelector(
-      '[data-testid="ArrowDropDownIcon"]'
-    )! as HTMLElement
-    ToolBarGridIconPaginatio
-      ? (ToolBarGridIconPaginatio.style.color = theme == 'light' ? 'black' : '#ccc')
-      : null
-
-    const ToolBarGridIconHeader = window.document.querySelectorAll(
-      '[data-testid="TripleDotsVerticalIcon"]'
-    )! as unknown as HTMLElement[]
-
-    for (let index = 0; index < ToolBarGridIconHeader.length; index++) {
-      ToolBarGridIconHeader[index].style.color = theme == 'light' ? 'black' : '#ccc'
-    }
-
 
   }, [theme])
 
