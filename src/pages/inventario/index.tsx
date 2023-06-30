@@ -6,6 +6,7 @@ import { db } from '@/database/firebase'
 import { DataGrid, GridColDef } from '@mui/x-data-grid'
 import { Button } from '@mui/material'
 import { ThemeContext } from '@/context/themeContext'
+import AddItemModal from '@/components/AddItemModal'
 // import ModalAdditem from '@/components/ModalAddItem'
 // import ModalEditItem from '@/components/ModalEditItem'
 
@@ -100,6 +101,10 @@ const Produtos = () => {
     }
   ])
 
+  const addItem = useCallback(() => {
+    setIsAddItem(prev => !prev)
+  }, [])
+
   const getItemById = (e: number) => {
     const result = products.filter(w => w.id == e)
     setProductGetId(result)
@@ -150,6 +155,7 @@ const Produtos = () => {
         FuncIsOpen={setIsEditItem}
         isOpen={isEditItem}
       /> */}
+      <AddItemModal isOpen={isAddItem} setIsOpen={addItem} fetchData={i as () => void} />
       <div
         className="py-2 px-2 w-full md:w-[calc(100%-100px)] lg:w-[calc(100%-80px)] md:pl-[130px] lg:pl-[300px]"
       >

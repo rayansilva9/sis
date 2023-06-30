@@ -10,7 +10,7 @@ export const TrackNavBarMobile = styled.div<props>`
   height: 50px;
   border-radius: 50%;
   top: -25px;
-  left: ${props => props.left - 12 + 'px'};
+  left: ${props => props.left - 10 + 'px'};
   background-color: ${props => (props.theme == 'light' ? 'white' : 'black')};
   position: absolute;
   z-index: 90;

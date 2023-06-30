@@ -51,23 +51,23 @@ const NavBarMobile = () => {
 
   return (
     <>
-      <div className="flex z-50 fixed left-0 bottom-0 w-screen h-[50px] bg-blue-700 md:hidden">
+      <div className="flex z-50 fixed left-0 bottom-0 w-screen h-[65px] bg-blue-700 md:hidden">
         <TrackNavBarMobile theme={theme} left={positionBar} />
         <ul className="w-full flex gap-3 items-center justify-around">
           <li
-            style={{ top: pathname == '/' ? '-20px' : 0, transition: 'top 0.3s linear' }}
+            style={{ top: pathname == '/' ? '-32px' : 0, transition: 'top 0.3s linear' }}
             ref={dashboardRef}
             className="z-[91] relative"
           >
             <Link href="/">
               <FiGrid
-                style={{ fontSize: '26px', color: theme == 'light' ? 'black' : 'white' }}
+                style={{ fontSize: '30px', color: theme == 'light' ? 'black' : 'white' }}
               />
             </Link>
           </li>
           <li
             style={{
-              top: pathname == '/inventario' ? '-20px' : 0,
+              top: pathname == '/inventario' ? '-32px' : 0,
               transition: 'top 0.3s linear',
               color: theme == 'light' ? 'black' : 'white'
             }}
@@ -76,12 +76,12 @@ const NavBarMobile = () => {
           >
             {' '}
             <Link href="/inventario">
-              <FiArchive style={{ fontSize: '26px' }} />
+              <FiArchive style={{ fontSize: '30px' }} />
             </Link>
           </li>
           <li
             style={{
-              top: pathname == '/vendas' ? '-20px' : 0,
+              top: pathname == '/vendas' ? '-32px' : 0,
               transition: 'top 0.3s linear',
               color: theme == 'light' ? 'black' : 'white'
             }}
@@ -90,12 +90,12 @@ const NavBarMobile = () => {
           >
             {' '}
             <Link href="/vendas">
-              <FiDollarSign style={{ fontSize: '26px' }} />
+              <FiDollarSign style={{ fontSize: '30px' }} />
             </Link>
           </li>
           <li
             style={{
-              top: pathname == '/configurar' ? '-20px' : 0,
+              top: pathname == '/configurar' ? '-32px' : 0,
               transition: 'top 0.3s linear',
               color: theme == 'light' ? 'black' : 'white'
             }}
@@ -104,7 +104,7 @@ const NavBarMobile = () => {
           >
             {' '}
             <Link href="/configurar">
-              <FiSettings style={{ fontSize: '26px' }} />
+              <FiSettings style={{ fontSize: '30px' }} />
             </Link>
           </li>
         </ul>
