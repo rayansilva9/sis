@@ -215,7 +215,7 @@ const Produtos = () => {
           <DataGrid
             sx={{
               transition: 'color 0.3s linear',
-              color: theme == 'light' ? 'black' : 'white',
+              color: theme == 'light' ? 'black !important' : 'white !important',
               border: theme == 'light' ? '1px solid #ccccccaa' : '1px solid #ccccccaa',
 
             }}
@@ -224,6 +224,7 @@ const Produtos = () => {
             loading={loading}
             columns={columns}
             autoHeight
+            className='gridClass'
             initialState={{
               pagination: {
                 paginationModel: { page: 0, pageSize: 10 }
