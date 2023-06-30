@@ -20,7 +20,35 @@ type product = {
 const Produtos = () => {
   const { theme } = useContext(ThemeContext)
 
+  if (typeof window !== "undefined") {
+    const ToolBarGrid = window.document.querySelector(
+      '.MuiToolbar-root'
+    )! as HTMLElement
+    ToolBarGrid
+      ? (ToolBarGrid.style.color = theme == 'light' ? 'black' : 'white')
+      : null
 
+    const ToolBarGridIconPaginatio = window.document.querySelector(
+      '[data-testid="ArrowDropDownIcon"]'
+    )! as HTMLElement
+    ToolBarGridIconPaginatio
+      ? (ToolBarGridIconPaginatio.style.color = theme == 'light' ? 'black' : '#ccc')
+      : null
+
+    const ToolBarGridIconHeader = window.document.querySelectorAll(
+      '[data-testid="TripleDotsVerticalIcon"]'
+    )! as unknown as HTMLElement[]
+
+    for (let index = 0; index < ToolBarGridIconHeader.length; index++) {
+      ToolBarGridIconHeader[index].style.color = theme == 'light' ? 'black' : '#ccc'
+    }
+  }
+
+  // useEffect(() => {
+  //   if (theme) {
+
+  //   }
+  // }, [])
 
   const [select, setSelect] = useState<number | string>(0)
   const [products, setProducts] = useState<product[]>([])
@@ -120,48 +148,20 @@ const Produtos = () => {
     setAlternate(result)
   }
 
-  const CalcPreco = useCallback((preco: number) => {
-    var f2 = preco.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })
-    return f2
-  }, [])
-
   function formatarMoeda(valor: number | string) {
-
-    valor = valor + '';
-    valor = parseInt(valor.replace(/[\D]+/g, ''));
-    valor = valor + '';
-    valor = valor.replace(/([0-9]{2})$/g, ",$1");
+    valor = valor + ''
+    valor = parseInt(valor.replace(/[\D]+/g, ''))
+    valor = valor + ''
+    valor = valor.replace(/([0-9]{2})$/g, ',$1')
 
     if (valor.length > 6) {
-      valor = valor.replace(/([0-9]{3}),([0-9]{2}$)/g, ".$1,$2");
+      valor = valor.replace(/([0-9]{3}),([0-9]{2}$)/g, '.$1,$2')
     }
 
     return valor
-
-  }
-
-  const ToolBarGrid = window.document.querySelector('.MuiToolbar-root')! as HTMLElement
-  ToolBarGrid ? (ToolBarGrid.style.color = theme == 'light' ? 'black' : 'white') : null
-
-  const ToolBarGridIconPaginatio = window.document.querySelector(
-    '[data-testid="ArrowDropDownIcon"]'
-  )! as HTMLElement
-  ToolBarGridIconPaginatio
-    ? (ToolBarGridIconPaginatio.style.color = theme == 'light' ? 'black' : '#ccc')
-    : null
-
-  const ToolBarGridIconHeader = window.document.querySelectorAll(
-    '[data-testid="TripleDotsVerticalIcon"]'
-  )! as unknown as HTMLElement[]
-
-  for (let index = 0; index < ToolBarGridIconHeader.length; index++) {
-    ToolBarGridIconHeader[index].style.color = theme == 'light' ? 'black' : '#ccc'
   }
 
 
-  // useEffect(() => {
-
-  // }, [])
 
   return (
     <>
@@ -177,9 +177,7 @@ const Produtos = () => {
         isOpen={isEditItem}
       /> */}
       <AddItemModal isOpen={isAddItem} setIsOpen={addItem} fetchData={i as () => void} />
-      <div
-        className="py-2 px-2 w-full md:w-[calc(100%-100px)] lg:w-[calc(100%-80px)] md:pl-[130px] lg:pl-[300px]"
-      >
+      <div className="py-2 px-2 w-full md:w-[calc(100%-100px)] lg:w-[calc(100%-80px)] md:pl-[130px] lg:pl-[300px]">
         <div className="flex my-2">
           <div className="hidden w-[100px]">
             <select
@@ -205,8 +203,10 @@ const Produtos = () => {
                 setFind(target.value), FindProduct()
               }}
               style={{
-                padding: '4px 4px', flex: 1, outline: 'none',
-                background: theme == 'light' ? 'white' : 'black',
+                padding: '4px 4px',
+                flex: 1,
+                outline: 'none',
+                background: theme == 'light' ? 'white' : 'black'
               }}
               placeholder="Procurar produto..."
             />
@@ -237,15 +237,14 @@ const Produtos = () => {
             sx={{
               transition: 'color 0.3s linear',
               color: theme == 'light' ? 'black !important' : 'white !important',
-              border: theme == 'light' ? '1px solid #ccccccaa' : '1px solid #ccccccaa',
-
+              border: theme == 'light' ? '1px solid #ccccccaa' : '1px solid #ccccccaa'
             }}
             onCellClick={e => getItemById(e.id as unknown as number)}
             rows={find != '' ? alternate : products}
             loading={loading}
             columns={columns}
             autoHeight
-            className='gridClass'
+            className="gridClass"
             initialState={{
               pagination: {
                 paginationModel: { page: 0, pageSize: 10 }
@@ -254,7 +253,7 @@ const Produtos = () => {
             pageSizeOptions={[5, 10, 50]}
           />
         </div>
-      </div >
+      </div>
     </>
   )
 }
