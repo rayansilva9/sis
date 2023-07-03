@@ -188,10 +188,10 @@ const Produtos = () => {
             </select>
           </div>
           <div
-            style={{ border: '1px solid #ccccccb1' }}
+            style={{ border: '1px solid #ccccccb1', borderRadius: '5px', }}
             className="flex gap-2 items-center px-4 w-full"
           >
-            <CiSearch style={{ fontSize: '20px', color: 'blue', strokeWidth: 0 }} />
+            <CiSearch style={{ fontSize: '20px', color: '#009dff', strokeWidth: 0, }} />
             <input
               type="text"
               onChange={({ target }) => {

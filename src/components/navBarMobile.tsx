@@ -44,7 +44,6 @@ const NavBarMobile = () => {
 
   useEffect(() => {
     updateBar()
-    console.log(positionBar)
   }, [pathname])
 
   const { theme } = useContext(ThemeContext)

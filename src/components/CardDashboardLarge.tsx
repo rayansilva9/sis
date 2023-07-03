@@ -44,8 +44,8 @@ const CardDashboardLarge = () => {
       {
         label: 'Dataset 1',
         data: [12, 54, 76, 12, 54, 12, 87],
-        borderColor: 'rgb(255, 99, 132)',
-        backgroundColor: 'rgba(255, 99, 132, 0.5)',
+        borderColor: 'rgba(247, 3, 255, 0.972)',
+        backgroundColor: 'rgba(247, 3, 255, 0.491)',
       },
       {
         label: 'Dataset 2',
