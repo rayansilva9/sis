@@ -7,6 +7,7 @@ import { DataGrid, GridColDef } from '@mui/x-data-grid'
 import { Button } from '@mui/material'
 import { ThemeContext } from '@/context/themeContext'
 import AddItemModal from '@/components/AddItemModal'
+import ModalEditItem from '@/components/EditItemModal'
 
 type product = {
   nome: string
@@ -44,11 +45,6 @@ const Produtos = () => {
     }
   }
 
-  // useEffect(() => {
-  //   if (theme) {
-
-  //   }
-  // }, [])
 
   const [select, setSelect] = useState<number | string>(0)
   const [products, setProducts] = useState<product[]>([])
@@ -165,7 +161,6 @@ const Produtos = () => {
 
   return (
     <>
-      {/* <ModalAdditem fetchData={i} FuncIsOpen={setIsAddItem} isOpen={isAddItem} />
       <ModalEditItem
         fetchData={i}
         ItemPrice={ProductGetId![0].price}
@@ -175,7 +170,7 @@ const Produtos = () => {
         ItemId={ProductGetId![0].id}
         FuncIsOpen={setIsEditItem}
         isOpen={isEditItem}
-      /> */}
+      />
       <AddItemModal isOpen={isAddItem} setIsOpen={addItem} fetchData={i as () => void} />
       <div className="py-2 px-2 w-full md:w-[calc(100%-100px)] lg:w-[calc(100%-80px)] md:pl-[130px] lg:pl-[300px]">
         <div className="flex my-2">
