@@ -15,7 +15,7 @@ export default function Home() {
     <>
       <div
         style={{ background: theme == 'light' ? 'white' : 'black', }}
-        className='h-auto w-screen md:pl-[130px] lg:pl-[300px] px-3 pb-14 flex flex-col sm:flex-row md:flex-col md:gap-5 '>
+        className='h-auto w-screen md:pl-[130px] lg:pl-[300px] px-3 pb-20 flex flex-col sm:flex-row md:flex-col md:gap-5 '>
         <div className=' w-full md:w-[calc(100%-100px)] lg:w-[calc(100%-80px)] flex flex-wrap items-center justify-center md:justify-between lg:justify-between gap-5 py-6'>
           <CardDashboardSmall />
           <CardDashboardSmall />

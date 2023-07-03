@@ -1,7 +1,6 @@
 import { ThemeContext } from '@/context/themeContext'
 import { Html, Head, Main, NextScript } from 'next/document'
 import { Roboto } from 'next/font/google'
-import { useRouter } from 'next/router'
 import { useContext } from 'react'
 
 export default function Document() {

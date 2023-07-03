@@ -53,14 +53,6 @@ const ModalAdditem: React.FC<props> = ({
     PriceInpRef.current!.value = ItemPrice
   }, [ItemDocId, ItemId, ItemName, ItemPrice, ItemQuantity])
 
-  console.log({
-    ItemDocId: ItemDocId,
-    ItemId: ItemId,
-    ItemName: ItemName,
-    ItemPrice: ItemPrice,
-    ItemQuantity: ItemQuantity
-  })
-
   const addNewProduct = async (e: any) => {
     e.preventDefault()
     setLoading(true)
@@ -110,11 +102,11 @@ const ModalAdditem: React.FC<props> = ({
       )}
       <div>
         <Backdrop
-          sx={{ color: theme == 'light' ? '#fff' : '#000', zIndex: '995' }}
+          sx={{ color: theme == 'light' ? '#fff' : '#000', zIndex: '995', backdropFilter: 'blur(4px)', }}
           open={isOpen}
         >
           <div
-            className="relative z-[996] w-[90%] h-[400px]  px-3 py-8 gap-3 rounded-xl shadow-2xl "
+            className="relative z-[996] w-[90%] h-[400px] lg:w-[600px]  px-3 lg:px-7 py-8 gap-3 rounded-xl shadow-2xl "
             style={{ background: theme == 'light' ? '#fff' : '#ececec' }}
           >
             <form onSubmit={addNewProduct} className="flex flex-col">

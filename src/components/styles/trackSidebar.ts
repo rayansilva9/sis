@@ -15,7 +15,7 @@ export const TrackSideBar = styled.div<Props>`
   top: ${props => props.top - 7 + 'px'};
   border-top-left-radius: 50px;
   border-bottom-left-radius: 50px;
-  transition: top 0.2s linear  !important;
+  transition: top 0.2s linear !important;
   transition: background 0.3s linear;
 
   @media (min-width: 768px) {
@@ -63,6 +63,7 @@ export const TrackSideBar = styled.div<Props>`
       top: -20px;
       border-bottom-right-radius: 20px;
       box-shadow: 6px 5px 0 0 red;
+      transition: background 0.3s linear;
     }
 
     &:before {
@@ -75,11 +76,12 @@ export const TrackSideBar = styled.div<Props>`
       bottom: -20px;
       border-top-right-radius: 20px;
       box-shadow: 6px -6px 0 0 red;
+      transition: background 0.3s linear;
     }
   }
 
   &:after {
-    transition: all 0.3s linear;
+    transition: background 0.3s linear;
     content: '';
     width: 20px;
     height: 20px;
@@ -92,7 +94,7 @@ export const TrackSideBar = styled.div<Props>`
   }
 
   &:before {
-    transition: all 0.3s linear;
+    transition: background 0.3s linear;
     content: '';
     width: 20px;
     height: 20px;

@@ -86,7 +86,7 @@ const AddItemModal: React.FC<props> = ({ isOpen, setIsOpen, fetchData }) => {
         <Backdrop
           sx={{ color: theme == 'light' ? '#fff' : '#000', zIndex: '995' }}
           open={isOpen}>
-          <div className="relative z-[996] w-[90%] h-[400px]  px-3 py-8 gap-3 rounded-xl shadow-2xl "
+          <div className="relative z-[996] w-[90%] h-[400px] lg:w-[600px]  px-3 lg:px-7 py-8 gap-3 rounded-xl shadow-2xl "
             style={{ background: theme == 'light' ? '#fff' : '#ececec', }}
           >
             <form onSubmit={addNewProduct} className="flex flex-col">
